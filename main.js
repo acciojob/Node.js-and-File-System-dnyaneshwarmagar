@@ -1,6 +1,6 @@
 const fs = require('fs');
 const readline = require('readline');
-
+const path= require("path")
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
@@ -8,7 +8,8 @@ const rl = readline.createInterface({
 
 rl.question('Enter the filename: ', (filename) => {
   rl.question('Enter the word to remove: ', (word) => {
-    removeWordFromFile(filename, word);
+    const filePath = path.join(__dirname, filename);
+    removeWordFromFile(filePath, word);
     rl.close();
   });
 });
