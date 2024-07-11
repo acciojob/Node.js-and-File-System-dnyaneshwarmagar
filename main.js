@@ -6,9 +6,9 @@ if (process.argv.length < 4) {
   process.exit(1);
 }
 
-const [fname, remove] = process.argv.slice(2);
+const [filename, wordToRemove] = process.argv.slice(2);
 
-const filePath = path.join(__dirname, fname);
+const filePath = path.join(__dirname, filename);
 
 fs.readFile(filePath, "utf8", (err, data) => {
   if (err) {
@@ -16,7 +16,7 @@ fs.readFile(filePath, "utf8", (err, data) => {
     return;
   }
 
-  const regex = new RegExp(`\\b${remove}\\b`, "g");
+  const regex = new RegExp(`\\b${wordToRemove}\\b`, "g");
   const modifiedData = data.replace(regex, "");
 
   fs.writeFile(filePath, modifiedData, "utf8", (err) => {
@@ -25,6 +25,6 @@ fs.readFile(filePath, "utf8", (err, data) => {
       return;
     }
 
-    console.log(`Removed ${remove} from ${fname}`);
+    console.log(`Removed ${wordToRemove} from ${filename}`);
   });
 });
